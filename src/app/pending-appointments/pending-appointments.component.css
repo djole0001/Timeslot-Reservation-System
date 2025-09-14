@@ -1,0 +1,84 @@
+.pending-container {
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.client-overview {
+  background: #ffe4e1;
+  border-left: 5px solid #ff4d4d;
+  padding: 15px 20px;
+  width: 350px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  .double {
+    display: flex;
+    gap: 0.3rem;
+    align-items: flex-end;
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .important-info {
+      font-size: large;
+    }
+  }
+
+  .treatment-card {
+    display: flex;
+    align-items: center;
+  }
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: none;
+  outline: none;
+}
+
+.no-button {
+  background: #6c757d;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  left: 30%;
+}
+
+.no-button:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+.yes-button {
+  background: green;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(255, 75, 92, 0.4);
+  left: 30%;
+}
+
+.yes-button:hover {
+  background: #d62839;
+  transform: translateY(-2px);
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin: auto;
+
+}
+

@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="left">
+    @if (selectedDate$ | async; as selectedDate) {
+      <app-calendar
+        [selectedDate]="selectedDate"
+        [selectedWeek]="selectedWeek$ | async"
+        [isPastDisabled]="true"
+        (selectDateEmitter)="selectDate($event)"
+        (selectNextWeekEmitter)="selectNextWeek()"
+        (selectPrevWeekEmitter)="selectPrevWeek()"
+      >
+        @let freeAppointments = freeAppointments$ | async;
+        @if (isLoadingFreeAppointments$ | async) {
+          <div class="spinner-container">
+            <div class="spinner"></div>
+          </div>
+        } @else {
+          @if (!freeAppointments?.length) {
+            <p>No free appointments</p>
+          } @else {
+            @for (
+              freeAppointment of freeAppointments;
+              track freeAppointment.date
+            ) {
+              <div class="hour">
+                <button
+                  class="hour"
+                  (click)="selectTime(freeAppointment.date)"
+                  [class.selected]="
+                    (selectedTime$ | async) === freeAppointment.date
+                  "
+                >
+                  {{ freeAppointment.date | date: "HH:mm" }}
+                </button>
+              </div>
+            }
+          }
+        }
+      </app-calendar>
+    }
+  </div>
+  <div class="right">
+    <app-display-data
+      summaryButtonIcon="add"
+      summaryButtonText="More treatments"
+      summaryButtonHref="/select-treatment"
+      [selectedTime]="(selectedTime$ | async)!"
+      [totalTimeForClient]="(totalTimeForClient$ | async)!"
+      [totalPrice]="(totalPrice$ | async)!"
+      [selectedTreatments]="(selectedTreatments$ | async)!"
+      (removeTreatmentEmitter)="removeTreatment($event)"
+    />
+  </div>
+</div>

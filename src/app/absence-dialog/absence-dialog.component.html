@@ -1,0 +1,100 @@
+<h1>Take a absence</h1>
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="x"
+>
+  @for (absenc of absence; track absenc) {
+    <mat-radio-button class="example-radio-button" [value]="absenc">
+      {{ absenc }}
+    </mat-radio-button>
+  }
+</mat-radio-group>
+
+@if (x === "All day") {
+  <form [formGroup]="myFormAllDay">
+    <mat-form-field>
+      <mat-label>From</mat-label>
+      <input matInput [matDatepicker]="from" formControlName="fromDate" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="from"></mat-datepicker-toggle>
+      <mat-datepicker #from></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>To</mat-label>
+      <input matInput [matDatepicker]="to" formControlName="toDate" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="to"></mat-datepicker-toggle>
+      <mat-datepicker #to></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave a comment</mat-label>
+      <textarea
+        matInput
+        placeholder="Comment..."
+        formControlName="comment"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="myFormAllDay.value.fromDate! > myFormAllDay.value.toDate!"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+      <button mat-raised-button color="warn" (click)="onCancel()">
+        Cancel
+      </button>
+    </mat-dialog-actions>
+  </form>
+} @else if (x === "Part day") {
+  <form [formGroup]="myFormPartDay">
+    <mat-form-field>
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="date" formControlName="date" />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="date"></mat-datepicker-toggle>
+      <mat-datepicker #date></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>From time</mat-label>
+      <input matInput [matTimepicker]="fromTime" formControlName="fromTime" />
+      <mat-timepicker-toggle
+        matIconSuffix
+        [for]="fromTime"
+      ></mat-timepicker-toggle>
+      <mat-timepicker #fromTime></mat-timepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>To time</mat-label>
+      <input matInput [matTimepicker]="toTime" formControlName="toTime" />
+      <mat-timepicker-toggle matIconSuffix [for]="toTime" />
+      <mat-timepicker #toTime />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave a comment</mat-label>
+      <textarea
+        matInput
+        placeholder="Comment..."
+        formControlName="comment"
+      ></textarea>
+    </mat-form-field>
+    <mat-dialog-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onSavePartDay()"
+        [disabled]="myFormPartDay.value.fromTime! > myFormPartDay.value.toTime!"
+      >
+        Save
+      </button>
+      <button mat-raised-button color="warn" (click)="onCancel()">
+        Cancel
+      </button>
+    </mat-dialog-actions>
+  </form>
+}

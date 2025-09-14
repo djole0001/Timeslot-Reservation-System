@@ -1,0 +1,21 @@
+<div class="confirmed-info"></div>
+<h2 mat-dialog-title>Reservation Information</h2>
+<mat-dialog-content>
+  <div class="reservation-info">
+    <p><strong>Appointment ID:</strong> {{ data.id }}</p>
+    <p><b>Name:</b> {{ data.name }}</p>
+    <p><b>Email:</b> {{ data.email }}</p>
+    <p><b>Instagram/Number:</b> {{ data.instagramNumber }}</p>
+    <p><b>Selected Time:</b> {{ data.selectedTime }}</p>
+    <p><strong>Treatments:</strong></p>
+    @for (treatments of data.selectedTreatments; track treatments.id) {
+      <span>{{ treatments.name }} </span>
+    }
+    <p><b>Total Duration:</b> {{ totalDuration | time }}</p>
+    <p><b>Total Price:</b> {{ totalPrice }} €</p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="close()">Close</button>
+</mat-dialog-actions>

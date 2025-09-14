@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="header">
+    <div class="month">
+      <button
+        mat-button
+        (click)="selectPrevWeekEmitter.emit()"
+        [disabled]="
+          selectedWeek ? isPastDisabled && selectedWeek[0] <= today : true
+        "
+      >
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <p>{{ selectedDate | date: "MMMM" }}</p>
+      <button mat-button (click)="selectNextWeekEmitter.emit()">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+    <div class="days">
+      @for (day of selectedWeek; track day) {
+        <div class="day">
+          <p>{{ day | date: "EEEEEE" }}</p>
+          <button
+            [class.selected]="day.getDay() === selectedDate?.getDay()"
+            [disabled]="isPastDisabled && day < today"
+            mat-button
+            (click)="selectDateEmitter.emit(day)"
+          >
+            {{ day | date: "dd" }}
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="body">
+    <ng-content />
+  </div>
+</div>

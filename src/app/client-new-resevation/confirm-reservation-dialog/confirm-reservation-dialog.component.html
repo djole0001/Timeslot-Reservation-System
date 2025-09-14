@@ -1,0 +1,30 @@
+<div class="content-container">
+  <div class="data">
+    <div class="confirm">
+      <span>Confirm reservation</span>
+    </div>
+    <div class="treatments">
+      <span>Treatment: </span>
+      @for (treatments of data.selectedTreatments; track treatments.id) {
+        <span>{{ treatments.name }}</span>
+      }
+    </div>
+    <span>Name: {{ data.name }}</span>
+    <span>Email: {{ data.email }}</span>
+    <span>Instagram/ Number: {{ data.instagramNumber }}</span>
+
+    <span>Comment: {{ data.comment }}</span>
+    <div class="time">
+      <span>{{ data.selectedTime | date: "EEEE, MMMM d, HH:mm" }}</span>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button mat-flat-button id="no-button" [mat-dialog-close]="false">
+      NO
+    </button>
+    <button mat-flat-button id="yes-button" [mat-dialog-close]="true">
+      YES
+    </button>
+  </div>
+</div>

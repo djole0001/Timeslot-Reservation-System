@@ -1,0 +1,51 @@
+<div class="checkout-container">
+  @let selectedTreatments = (selectedTreatments$ | async)!;
+  @let selectedTime = (selectedTime$ | async)!;
+  <form
+    class="form"
+    [formGroup]="myForm"
+    (ngSubmit)="submit(selectedTreatments, selectedTime)"
+  >
+    <h2>Enter the data</h2>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name" />
+      <mat-error>Enter the name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+      <mat-error>Enter the email</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Instagram/Number</mat-label>
+      <input matInput type="text" formControlName="instagramNumber" />
+      <mat-error>Enter the instagram or phone number</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Leave a comment</mat-label>
+      <textarea
+        matInput
+        formControlName="comment"
+        placeholder="Enter the comment..."
+      ></textarea>
+    </mat-form-field>
+    <div class="action-btns">
+      <button mat-raised-button mat-button type="submit">Next</button>
+    </div>
+  </form>
+
+  <div>
+    <app-display-data
+      [disableButtons]="true"
+      [selectedTime]="(selectedTime$ | async)!"
+      [totalTimeForClient]="(totalTimeForClient$ | async)!"
+      [totalPrice]="(totalPrice$ | async)!"
+      [selectedTreatments]="(selectedTreatments$ | async)!"
+      (removeTreatmentEmitter)="removeTreatment($event)"
+      summaryButtonIcon="arrow_back_ios"
+      summaryButtonText="Edit appoitment"
+      summaryButtonHref="/select-appointment"
+    />
+  </div>
+</div>

@@ -1,0 +1,28 @@
+<header>
+  <h1>Select Our Treatment</h1>
+  <p>Choose treatment which u need!</p>
+</header>
+<section class="treatments-container">
+  @if (treatments$ | async; as treatments) {
+    @for (treatment of treatments; track treatment.id) {
+      <div class="treatment-card">
+        <h2 class="treatment-name">{{ treatment?.name }}</h2>
+        <p class="treatment-price">€{{ treatment?.price }}</p>
+        <p class="treatment-duration">
+          Duration client: {{ treatment.durationForClient | time }}
+        </p>
+        @if (treatment.isSelected) {
+          <button class="deselect-btn" (click)="deselectTreatment(treatment)">
+            Deselect
+          </button>
+        } @else {
+          <button class="select-btn" (click)="selectTreatment(treatment)">
+            Select
+          </button>
+        }
+      </div>
+    }
+  }
+</section>
+
+<app-floating-window></app-floating-window>

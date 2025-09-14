@@ -1,0 +1,55 @@
+.calendar-container {
+  display: flex;
+  justify-content: center;
+}
+
+.spinner-container {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+}
+
+
+.spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #ff8a80;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  animation: spin 1.5s linear infinite;
+  margin-bottom: 1.5rem;
+}
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.confirmed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+
+  .header {
+    display: inline-flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    font-size: large;
+    
+  }
+
+  .body {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+
+}

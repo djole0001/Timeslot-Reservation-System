@@ -1,0 +1,41 @@
+<form [formGroup]="myForm">
+  <mat-dialog-content>
+    <header>
+      <h1>Create treatment</h1>
+    </header>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      <mat-error>Enter the name of treatment</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input type="number" matInput formControlName="price" />
+      <mat-error>Enter the price</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Duration for worker</mat-label>
+      <input type="number" matInput formControlName="durationWorker" />
+      <mat-error>Enter duration for worker</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Duration for client</mat-label>
+      <input type="number" matInput formControlName="durationClient" />
+      <mat-error>Enter duration for client</mat-error>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="myForm.invalid"
+      (click)="onSave()"
+    >
+      Save
+    </button>
+    <button mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+  </mat-dialog-actions>
+</form>

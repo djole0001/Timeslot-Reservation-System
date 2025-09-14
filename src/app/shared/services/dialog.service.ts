@@ -1,0 +1,23 @@
+import { inject, Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatConfirmDialogComponent } from '../dialogs/mat-confirm-dialog/mat-confirm-dialog.component';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class DialogService {
+  private dialog = inject(MatDialog);
+
+  constructor() {}
+
+  openConfirmDialog(msg: string) {
+    return this.dialog.open(MatConfirmDialogComponent, {
+      width: '390px',
+      panelClass: 'confirm-dialog-container',
+      disableClose: true,
+      data: {
+        message: msg,
+      },
+    });
+  }
+}

@@ -1,0 +1,55 @@
+<header>
+  <h1>Our Treatments</h1>
+  <p>Create new treatment!</p>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="openDialog()">
+      Add New Treatment
+    </button>
+  </mat-dialog-actions>
+</header>
+
+@let loading = isLoading$ | async;
+
+@if (loading) {
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+}
+
+<section class="treatments-container">
+  @if (treatments$ | async; as treatments) {
+    @if (!loading) {
+      @for (treatment of treatments; track treatment.id) {
+        <div class="treatment-card">
+          <h2 class="treatment-name">{{ treatment?.name }}</h2>
+          <p class="treatment-price">€{{ treatment.price }}</p>
+          <p class="treatment-duration">
+            Duration client: {{ treatment.durationForClient | time }}
+          </p>
+          <p class="treatment-duration">
+            Duration worker: {{ treatment.durationForWorker | time }}
+          </p>
+          <mat-icon>
+            <span
+              class="material-symbols-outlined-edit"
+              (click)="editDialog(treatment)"
+            >
+              edit
+            </span>
+          </mat-icon>
+          <mat-icon>
+            <span
+              class="material-symbols-outlined-delete"
+              (click)="onDelete(treatment)"
+            >
+              delete
+            </span>
+          </mat-icon>
+        </div>
+      }
+      @if (!treatments?.length) {
+        Currently there are no treatments available. Please create a new one.
+      }
+    }
+  }
+</section>

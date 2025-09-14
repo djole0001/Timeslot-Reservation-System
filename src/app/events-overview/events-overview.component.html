@@ -1,0 +1,128 @@
+@if (selectedDate$ | async; as selectedDate) {
+  <div class="calendar-container" xmlns="http://www.w3.org/1999/html">
+    <app-calendar
+      [selectedDate]="selectedDate"
+      [selectedWeek]="selectedWeek$ | async"
+      [isPastDisabled]="false"
+      (selectDateEmitter)="selectDate($event)"
+      (selectNextWeekEmitter)="selectNextWeek()"
+      (selectPrevWeekEmitter)="selectPrevWeek()"
+    >
+      @let absencesForWholeDay = absenceSForWholeDay$ | async;
+      @let combinedAppointmentsAndAbsencesPartDay =
+        combinedAppointmentAndAbsencePartDay$ | async;
+      @if (isLoading$ | async) {
+        <div class="spinner-container">
+          <div class="spinner"></div>
+        </div>
+      } @else {
+        @if (
+          !combinedAppointmentsAndAbsencesPartDay?.length &&
+          !absencesForWholeDay?.length
+        ) {
+          <p>No items to show.</p>
+        } @else {
+          <div class="confirmed-container">
+            @for (absence of absencesForWholeDay; track absence) {
+              <mat-accordion>
+                <mat-expansion-panel hideToggle disabled>
+                  <mat-expansion-panel-header>
+                    <div class="header">
+                      <mat-panel-title>
+                        <div class="left-header">
+                          {{ absence.header.content }}
+                        </div>
+                      </mat-panel-title>
+
+                      <mat-panel-description>
+                        <div class="right-header">
+                          {{ absence.header.rightContent }}
+                        </div>
+                      </mat-panel-description>
+                    </div>
+                  </mat-expansion-panel-header>
+                </mat-expansion-panel>
+              </mat-accordion>
+            }
+            @for (
+              combinedAppointmentAndAbsencePartDay of combinedAppointmentsAndAbsencesPartDay;
+              track combinedAppointmentAndAbsencePartDay.header.rightContent
+            ) {
+              @if (!combinedAppointmentAndAbsencePartDay.items?.length) {
+                <mat-accordion>
+                  <mat-expansion-panel hideToggle disabled>
+                    <mat-expansion-panel-header>
+                      <div class="header">
+                        <mat-panel-title>
+                          <div class="left-header">
+                            {{
+                              combinedAppointmentAndAbsencePartDay.header
+                                .content
+                            }}
+                          </div>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          <div class="right-header">
+                            {{
+                              combinedAppointmentAndAbsencePartDay.header
+                                .rightContent
+                            }}
+                          </div>
+                        </mat-panel-description>
+                      </div>
+                    </mat-expansion-panel-header>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              } @else {
+                <mat-accordion>
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <div class="header">
+                        <mat-panel-title>
+                          <div class="left-header">
+                            {{
+                              combinedAppointmentAndAbsencePartDay.header
+                                .content
+                            }}
+                          </div>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          <div class="right-header">
+                            {{
+                              combinedAppointmentAndAbsencePartDay.header
+                                .rightContent
+                            }}
+                          </div>
+                        </mat-panel-description>
+                      </div>
+                    </mat-expansion-panel-header>
+                    <p>
+                      @for (
+                        item of combinedAppointmentAndAbsencePartDay.items;
+                        track item.content
+                      ) {
+                        <div class="body">
+                          <div class="left">
+                            <p>{{ item.content }}</p>
+                          </div>
+                          <div class="right">
+                            <p>{{ item.rightContent }}</p>
+                          </div>
+                        </div>
+                      }
+                    </p>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              }
+            }
+          </div>
+        }
+      }
+    </app-calendar>
+    <mat-dialog-actions>
+      <button mat-raised-button color="primary" (click)="openDialog()">
+        Absence
+      </button>
+    </mat-dialog-actions>
+  </div>
+}

@@ -1,0 +1,69 @@
+<div class="display-container">
+  <div class="header">
+    <h1 class="h1">Order overview</h1>
+
+    <div class="selected-date">
+      <p class="time">{{ selectedTime | date: "HH:mm" }}</p>
+      <div class="right-side">
+        <p class="date">{{ selectedTime | date: "EEE, d MMM" }}</p>
+        <p class="duration">Total time: {{ totalTimeForClient | time }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="treatments-container">
+    <div class="treatment-name">
+      @if (selectedTreatments; as treatments) {
+        @for (treatment of treatments; track treatment.id) {
+          <div class="treatment-card">
+            <div class="treatment-info">
+              <p>{{ treatment?.name }}</p>
+              <div class="price-time">
+                <p class="price">{{ treatment?.price }}€</p>
+                <p>
+                  {{ treatment?.durationForClient | time }}
+                </p>
+              </div>
+            </div>
+            @if (!disableButtons) {
+              <button
+                mat-button
+                class="deselect-btn"
+                (click)="deselectTreatment(treatment)"
+              >
+                <mat-icon>close</mat-icon>
+              </button>
+            }
+          </div>
+        }
+      }
+    </div>
+
+    <hr />
+    <div class="info-summary">
+      @if (summaryButtonText && summaryButtonHref) {
+        <a mat-raised-button [routerLink]="summaryButtonHref">
+          @if (summaryButtonIcon) {
+            <mat-icon>{{ summaryButtonIcon }}</mat-icon>
+          }
+          {{ summaryButtonText }}
+        </a>
+      }
+      <div class="price-time">
+        <h2>Total price: €{{ totalPrice }}</h2>
+      </div>
+    </div>
+    <hr />
+  </div>
+  @if (!disableButtons) {
+    <a
+      mat-raised-button
+      role="link"
+      [routerLink]="!selectedTime ? undefined : '/checkout'"
+      [attr.aria-disabled]="!selectedTime"
+      [ngClass]="{ disabled: !selectedTime }"
+    >
+      Go to checkout
+    </a>
+  }
+</div>

@@ -1,0 +1,103 @@
+header {
+  background: linear-gradient(135deg, #f48fb1, #ff8a80);
+  color: #fff;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 35px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem;
+  margin-top: -1px;
+}
+
+header p {
+  font-size: 25px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  padding: 1rem 1rem;
+}
+
+
+.treatments-container {
+  display: flex;
+  flex-direction: unset;
+  gap: 15px;
+  padding: 20px;
+}
+
+.treatment-card {
+  background: #ffe4e1;
+  border-left: 5px solid #ff4d4d;
+  padding: 15px 20px;
+  width: 350px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.treatment-card:hover {
+  transform: scale(1.03);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.treatment-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.treatment-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff4d4d;
+  margin-top: 5px;
+}
+
+.treatment-duration {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.select-btn {
+  background-color: #4caf50;
+  color: black;
+}
+
+button.select-btn:hover {
+  background-color: #388e3c;
+}
+
+button.deselect-btn {
+  background-color: red;
+  color: black;
+
+}
+
+button.deselect-btn::before {
+  content: "✖";
+  font-size: 15px;
+  margin-right: 8px;
+}
+
+button.deselect-btn:hover {
+  background-color: #d32f2f;
+}
+
+

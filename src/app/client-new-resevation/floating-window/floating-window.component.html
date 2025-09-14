@@ -1,0 +1,21 @@
+<div class="payment-bar">
+  @let totalPrice = totalPrice$ | async;
+  @let totalTimeForClient = totalTimeForClient$ | async;
+  @if (selectedTreatments$ | async; as selectedTreatments) {
+    @if (selectedTreatments.length > 0) {
+      <p>Total Selected: {{ selectedTreatments.length }}</p>
+      <p>
+        Total Time:
+        {{ totalTimeForClient | time }}
+      </p>
+      <p>Total Price: €{{ totalPrice }}</p>
+    } @else {
+      Nothing selected
+    }
+    @if (selectedTreatments.length > 0) {
+      <button class="floating-button" (click)="goToPage('/select-appointment')">
+        <span>Select Appointment</span>
+      </button>
+    }
+  }
+</div>

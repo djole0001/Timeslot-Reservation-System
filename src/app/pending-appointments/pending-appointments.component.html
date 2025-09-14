@@ -1,0 +1,97 @@
+@if (pendingAppointmentsIsLoading$ | async) {
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+} @else {
+  <section class="pending-container">
+    @if (pendingAppointments$ | async; as pendingAppointments) {
+      @for (
+        pendingAppointment of pendingAppointments;
+        track pendingAppointment.id
+      ) {
+        <div class="client-overview">
+          <div class="double">
+            <span>Name:</span>
+            <span class="bold important-info">{{
+              pendingAppointment.name
+            }}</span>
+          </div>
+          <div class="double">
+            <span>Date:</span>
+            <span class="bold important-info"
+              >{{
+                pendingAppointment.selectedTime | date: "EEEE, dd.MM.y, HH:mm"
+              }}-{{
+                pendingAppointment | getAppointmentEndTime | date: "HH:mm"
+              }}</span
+            >
+          </div>
+          <div class="double">
+            <span>Price:</span>
+            <span class="bold important-info"
+              >€{{
+                pendingAppointment.selectedTreatments | sumAppointmentPrice
+              }}</span
+            >
+          </div>
+          <div class="double">
+            <span>Email:</span>
+            <span class="bold">{{ pendingAppointment.email }}</span>
+          </div>
+          <div class="double">
+            <span>Inst/Num:</span>
+            <span class="bold">{{ pendingAppointment.instagramNumber }}</span>
+          </div>
+          <div class="double">
+            <span>Created:</span>
+            <span class="bold">{{
+              pendingAppointment.createdAt | date: "dd.MM.y, HH:mm"
+            }}</span>
+          </div>
+          <div class="double">
+            <span>Comment:</span>
+            <span class="bold">{{ pendingAppointment.comment }}</span>
+          </div>
+          <div class="treatment-card">
+            <mat-chip-set>
+              @for (
+                pendingAppointments of pendingAppointment.selectedTreatments;
+                track pendingAppointments.id
+              ) {
+                <mat-chip
+                  >{{ pendingAppointments.name }}
+                  {{ pendingAppointments.duration | time }}
+                  €{{ pendingAppointments.price }}
+                </mat-chip>
+              }
+            </mat-chip-set>
+          </div>
+          <div class="buttons">
+            <div>
+              <button
+                class="yes-button"
+                type="button"
+                (click)="confirmedPendingAppointment(pendingAppointment)"
+              >
+                YES
+              </button>
+            </div>
+            <div>
+              <button
+                class="no-button"
+                type="button"
+                (click)="cancelledPendingAppointment(pendingAppointment)"
+              >
+                NO
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (!pendingAppointments?.length) {
+        Currently there are no pending appointments.
+      }
+    }
+  </section>
+}

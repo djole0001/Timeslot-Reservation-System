@@ -1,0 +1,71 @@
+.payment-bar {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 15px 20px;
+  box-shadow: 0px -4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 15px 15px 0 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.payment-bar p {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 5px 0;
+}
+
+.pay-button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 80%;
+}
+
+.pay-button:hover {
+  background-color: #388e3c;
+}
+
+.pay-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.floating-button {
+  background: #0909bd;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+
+}
+
+.floating-button:hover {
+  background: slateblue;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+  transform: scale(1.05);
+}
+
+.floating-button:active {
+  transform: scale(0.95);
+}
+

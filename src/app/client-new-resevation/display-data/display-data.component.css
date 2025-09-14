@@ -1,0 +1,129 @@
+.display-container {
+  display: grid;
+  background-color: #f8f9fa;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 8px;
+  font-family: ui-rounded;
+  justify-items: center;
+
+  .h1 {
+    color: pink;
+    margin: 0;
+  }
+}
+
+.header {
+  display: grid;
+  justify-items: center;
+}
+
+
+.treatments-container {
+  width: 100%;
+  align-items: center;
+  display: inline;
+}
+
+.treatment {
+  display: inline;
+}
+
+.treatment-card {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  position: relative;
+
+  &:not(:first-of-type) {
+
+
+    &:before {
+      content: "";
+      border-top: 0.05rem solid #6c757d;
+      position: absolute;
+      width: 100%;
+      top: 0;
+    }
+  }
+
+  .treatment-name {
+    margin: 0;
+  }
+
+  .treatment-info {
+    p {
+      margin: 0;
+    }
+
+
+    .price-time {
+      display: flex;
+      color: var(--mat-sys-primary);
+
+      .price {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+}
+
+.deselect-btn {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+}
+
+.selected-date {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+
+  .time {
+    font-size: xx-large;
+    font-weight: 600;
+    color: var(--mat-sys-primary);
+    border-right: solid 2px;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    padding-right: 1rem;
+    margin: 0;
+    justify-content: center;
+  }
+
+  .right-side {
+    padding-left: 1rem;
+
+
+    .date {
+      color: var(--mat-sys-primary);
+      font-weight: 600;
+      margin: 0.5rem 0 0;
+    }
+
+    .duration {
+      color: var(--mat-sys-primary);
+      margin: 0 0 0.5rem;
+
+    }
+  }
+}
+
+.info-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  text-decoration: none;
+  color: black;
+
+
+}
+
+
+
+
